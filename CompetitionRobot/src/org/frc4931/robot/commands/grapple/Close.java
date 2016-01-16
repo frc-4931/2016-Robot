@@ -12,6 +12,6 @@ public class Close extends org.strongback.command.Command {
 	@Override
 	public boolean execute() {
 		grapple.close();
-		return false;
+		return true;
 	}
 }

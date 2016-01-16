@@ -14,6 +14,6 @@ public class Raise extends org.strongback.command.Command {
 	@Override
 	public boolean execute() {
 		grapple.raise();
-		return false;
+		return true;
 	}
 }

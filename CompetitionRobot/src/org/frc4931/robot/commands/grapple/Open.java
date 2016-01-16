@@ -12,6 +12,6 @@ public class Open extends org.strongback.command.Command {
 	@Override
 	public boolean execute() {
 		grapple.open();
-		return false;
+		return true;
 	}
 }

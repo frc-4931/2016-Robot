@@ -1,5 +1,7 @@
 package org.frc4931.robot.drive;
 
+import org.strongback.command.Command;
+
 public class Drive extends org.strongback.command.Command {
 	private DriveSystem driveSystem;
 	private double driveSpeed; // in percent throttle
@@ -16,8 +18,8 @@ public class Drive extends org.strongback.command.Command {
 	@Override
 	public boolean execute() {
 		driveSystem.arcade(driveSpeed, turnSpeed);
-		this.pause(driveTime);
+		Command.pause(driveTime);
 		driveSystem.stop();
-		return false;
+		return true;
 	}
 }
