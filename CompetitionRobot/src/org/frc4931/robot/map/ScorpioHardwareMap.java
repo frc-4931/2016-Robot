@@ -34,10 +34,9 @@ public class ScorpioHardwareMap implements HardwareMap {
 
     @Override
     public DriveSystem getDriveSystem() {
-        //TODO Verify port numbers and directions
         return new DriveSystem(new TankDrive(
-                Motor.compose(Hardware.Motors.talon(0), Hardware.Motors.talon(1)).invert(),
-                Motor.compose(Hardware.Motors.talon(2), Hardware.Motors.talon(2))
+                Motor.compose(Hardware.Motors.talon(0), Hardware.Motors.talon(1)),
+                Motor.compose(Hardware.Motors.talon(2), Hardware.Motors.talon(3)).invert()
         ));
     }
 }

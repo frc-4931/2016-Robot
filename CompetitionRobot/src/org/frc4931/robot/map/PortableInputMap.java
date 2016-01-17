@@ -25,33 +25,30 @@ package org.frc4931.robot.map;
 import org.strongback.components.Switch;
 import org.strongback.components.ui.ContinuousRange;
 import org.strongback.components.ui.FlightStick;
-import org.strongback.components.ui.InputDevice;
 import org.strongback.hardware.Hardware;
 
 /**
- * An input map that utilizes the button pad on our operator console.
+ * An input mapping that uses as few input devices as possible.
  */
-public class ConsoleInputMap implements InputMap {
-    private InputDevice console;
-    private FlightStick driveStick;
+public class PortableInputMap implements InputMap {
+    private final FlightStick flightStick;
 
-    public ConsoleInputMap() {
-        console = Hardware.HumanInterfaceDevices.driverStationJoystick(0);
-        driveStick = Hardware.HumanInterfaceDevices.logitechAttack3D(1);
+    public PortableInputMap() {
+        flightStick = Hardware.HumanInterfaceDevices.logitechAttack3D(0);
     }
 
     @Override
     public ContinuousRange getDriveSpeed() {
-        return driveStick.getPitch().invert();
+        return flightStick.getPitch().invert();
     }
 
     @Override
     public ContinuousRange getTurnSpeed() {
-        return driveStick.getYaw();
+        return flightStick.getYaw();
     }
 
     @Override
     public Switch getFlipSwitch() {
-        return driveStick.getThumb();
+        return flightStick.getThumb();
     }
 }
