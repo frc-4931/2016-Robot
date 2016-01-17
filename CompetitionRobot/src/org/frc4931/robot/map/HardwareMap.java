@@ -20,35 +20,14 @@
  * SOFTWARE.
  */
 
-package org.frc4931.robot.impl;
+package org.frc4931.robot.map;
 
-import org.strongback.components.Switch;
-import org.strongback.components.ui.ContinuousRange;
-import org.strongback.components.ui.FlightStick;
-import org.strongback.components.ui.InputDevice;
-import org.strongback.hardware.Hardware;
+import org.frc4931.robot.drive.DriveSystem;
 
-public class ConsoleInputMap implements InputMap {
-    private InputDevice console;
-    private FlightStick driveStick;
+/**
+ * Defines a set of hardware and subsystems that the robot will use.
+ */
+public interface HardwareMap {
 
-    public ConsoleInputMap() {
-        console = Hardware.HumanInterfaceDevices.driverStationJoystick(0);
-        driveStick = Hardware.HumanInterfaceDevices.logitechAttack3D(1);
-    }
-
-    @Override
-    public ContinuousRange getDriveSpeed() {
-        return driveStick.getPitch().invert();
-    }
-
-    @Override
-    public ContinuousRange getTurnSpeed() {
-        return driveStick.getYaw();
-    }
-
-    @Override
-    public Switch getFlipSwitch() {
-        return driveStick.getThumb();
-    }
+    DriveSystem getDriveSystem();
 }

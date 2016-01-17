@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package org.frc4931.robot.impl;
+package org.frc4931.robot.map;
 
 import org.frc4931.robot.drive.DriveSystem;
 import org.strongback.components.Motor;

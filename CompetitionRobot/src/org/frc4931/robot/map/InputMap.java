@@ -20,14 +20,19 @@
  * SOFTWARE.
  */
 
-package org.frc4931.robot.impl;
+package org.frc4931.robot.map;
 
-import org.frc4931.robot.drive.DriveSystem;
+import org.strongback.components.Switch;
+import org.strongback.components.ui.ContinuousRange;
 
 /**
- * Defines a set of hardware and subsystems that the robot will use.
+ * Defines a mapped set of controls.
  */
-public interface HardwareMap {
+public interface InputMap {
 
-    DriveSystem getDriveSystem();
+    ContinuousRange getDriveSpeed();
+
+    ContinuousRange getTurnSpeed();
+
+    Switch getFlipSwitch();
 }

@@ -25,10 +25,10 @@ package org.frc4931.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.frc4931.robot.drive.DriveSystem;
-import org.frc4931.robot.impl.ConsoleInputMap;
-import org.frc4931.robot.impl.InputMap;
-import org.frc4931.robot.impl.HardwareMap;
-import org.frc4931.robot.impl.ScorpioHardwareMap;
+import org.frc4931.robot.map.ConsoleInputMap;
+import org.frc4931.robot.map.InputMap;
+import org.frc4931.robot.map.HardwareMap;
+import org.frc4931.robot.map.ScorpioHardwareMap;
 import org.strongback.Strongback;
 import org.strongback.components.Switch;
 import org.strongback.components.ui.ContinuousRange;
