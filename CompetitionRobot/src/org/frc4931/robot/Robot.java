@@ -24,12 +24,31 @@
 package org.frc4931.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import org.frc4931.robot.drive.DriveSystem;
+import org.frc4931.robot.map.HardwareMap;
+import org.frc4931.robot.map.InputMap;
+import org.frc4931.robot.map.PortableInputMap;
+import org.frc4931.robot.map.ScorpioHardwareMap;
 import org.strongback.Strongback;
+import org.strongback.components.Switch;
+import org.strongback.components.ui.ContinuousRange;
 
 public class Robot extends IterativeRobot {
+    private DriveSystem driveSystem;
+    private ContinuousRange driveSpeed;
+    private ContinuousRange turnSpeed;
+    private Switch flipDirection;
+    private boolean lastFlipState;
 
     @Override
     public void robotInit() {
+        HardwareMap hardwareMap = new ScorpioHardwareMap();
+        InputMap inputMap = new PortableInputMap();
+
+        driveSystem = hardwareMap.getDriveSystem();
+        driveSpeed = inputMap.getDriveSpeed();
+        turnSpeed = inputMap.getTurnSpeed();
+        flipDirection = inputMap.getFlipSwitch();
     }
 
     @Override
@@ -40,11 +59,20 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+        driveSystem.arcade(driveSpeed.read(), turnSpeed.read());
+
+        boolean flip = flipDirection.isTriggered();
+        if (flip && !lastFlipState) {
+            driveSystem.toggleDirectionFlipped();
+        }
+        lastFlipState = flip;
     }
 
     @Override
     public void disabledInit() {
         // Tell Strongback that the robot is disabled so it can flush and kill commands.
         Strongback.disable();
+
+        lastFlipState = false;
     }
 }
