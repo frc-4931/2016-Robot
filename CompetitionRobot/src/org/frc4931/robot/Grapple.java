@@ -1,12 +1,12 @@
 package org.frc4931.robot;
 
 import org.strongback.components.Motor;
-
-import edu.wpi.first.wpilibj.Solenoid;
+import org.strongback.components.Solenoid;
 
 public class Grapple {
 	private Motor winch; // pulls robot up after arm attaches to tower
 	private Solenoid extender; // releases arm/puts it up (arm is spring loaded)
+	private static final double climbSpeed = 0.0; // in percent throttle
 	
 	public Grapple(Motor motor, Solenoid solenoid){
 		winch = motor;
@@ -17,28 +17,20 @@ public class Grapple {
 	 * Releases the arm so the robot can scale the tower.
 	 */
 	public void open(){
-		
+		extender.retract();
 	}
 	
 	/**
 	 * Moves the solenoid back in place.
 	 */
 	public void close(){
-		
-	}
-	
-	/**
-	 * Gets the distance between the robot and the ground.
-	 * @return the distance in _.
-	 */
-	public double getPosition(){
-		return 0;
+		extender.extend();
 	}
 	
 	/**
 	 * Makes the robot climb the tower.
 	 */
 	public void raise(){
-		
+		winch.setSpeed(climbSpeed);
 	}
 }
