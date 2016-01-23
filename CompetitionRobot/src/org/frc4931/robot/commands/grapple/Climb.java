@@ -4,7 +4,7 @@ import org.frc4931.robot.Grapple;
 
 public class Climb extends org.strongback.command.Command {
 	private Grapple grapple;
-	public static final double climbTime = 0.0; // in seconds
+	private static final double climbTime = 0.0; // in seconds
 	
 	public Climb(Grapple grapple){
 		super(climbTime);
