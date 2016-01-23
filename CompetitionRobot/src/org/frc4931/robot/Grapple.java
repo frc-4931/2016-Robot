@@ -30,7 +30,7 @@ public class Grapple {
 	/**
 	 * Makes the robot climb the tower.
 	 */
-	public void raise(){
+	public void climb(){
 		winch.setSpeed(climbSpeed);
 	}
 }

@@ -13,7 +13,7 @@ public class Climb extends org.strongback.command.Command {
 	
 	@Override
 	public boolean execute() {
-		grapple.raise();
+		grapple.climb();
 		return true;
 	}
 }
