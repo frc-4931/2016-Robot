@@ -1,0 +1,5 @@
+stuff to test:
+	1. OpenAndClose - openTime
+	2. Conquer - driveSpeed & driveTime
+	3. Grapple - climbSpeed
+	4. Climb - climbTime
