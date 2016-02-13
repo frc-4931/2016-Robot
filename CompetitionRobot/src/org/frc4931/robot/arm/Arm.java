@@ -22,6 +22,7 @@
 
 package org.frc4931.robot.arm;
 
+import org.strongback.command.Requirable;
 import org.strongback.components.AngleSensor;
 import org.strongback.components.Motor;
 import org.strongback.components.Switch;
@@ -31,14 +32,13 @@ import org.strongback.components.TalonSRX;
  * The Arm is a subsystem of the robot that can be used to raise and lower to specific angles.
  * It is used to traverse tall defenses and open gates.
  */
-public class Arm {
+public class Arm implements Requirable
+{
     public static final double MOTOR_SPEED = 1.0;
 
     private final Motor motor;
-    private AngleSensor angleSensor;
+    private final AngleSensor angleSensor;
     private final Switch homeSwitch;
-
-    private double zeroAngle;
 
     /**
      * Constructs a new Arm subsystem given a motor, an angle sensor, and a home switch.
@@ -50,8 +50,6 @@ public class Arm {
         this.motor = motor;
         this.angleSensor = angleSensor;
         this.homeSwitch = homeSwitch;
-
-        zeroAngle = 0.0;
     }
 
     /**
@@ -89,7 +87,7 @@ public class Arm {
      * @return The angle of the arm.
      */
     public double getAngle() {
-        return angleSensor.getAngle() - zeroAngle;
+        return angleSensor.getAngle();
     }
 
     /**
@@ -97,9 +95,7 @@ public class Arm {
      * Any subsequent calls to {@link #getAngle()} will be relative to its new zero angle.
      */
     public void zero() {
-        // I prefer using this rather than AngleSensor.zero(). Stack traces can build up for getAngle() for an
-        // angle sensor that is zeroed multiple times, depending upon the implementation.
-        zeroAngle = angleSensor.getAngle();
+        angleSensor.zero();
     }
 
     /**
