@@ -2,7 +2,6 @@ package application;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import static application.MetersToPixels.convertPixels;
-import static application.MetersToPixels.convertMeters;
 
 public class RobotConversion 
 {
@@ -60,7 +59,7 @@ public class RobotConversion
 	
 	/**
 	 * sets the robots rotational value to have a direction in the map
-	 * @param r
+	 * @param r the rotational value
 	 */
 	public void setRotation(double r)
 	{

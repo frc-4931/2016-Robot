@@ -1,12 +1,11 @@
 package Obstacles;
-import java.util.Scanner;
 
 /**
  * 
  * @author Julian Nieto
  *
  */
-public class Obstacles 
+public class Obstacles
 {
 	public final static String LOWBAR = "LB";
 	public final static String ROCKWALL = "RW";
@@ -22,7 +21,6 @@ public class Obstacles
 	/**
 	 * Only pass the positions of the constants in the Position class
 	 * @param o identifier number only Constants
-	 * @param x Position  in constants
 	 */
 	public Obstacles(String o)
 	{
@@ -33,7 +31,8 @@ public class Obstacles
 	{
 		return identifierString;
 	}
-	public String toString()
+	@Override
+    public String toString()
 	{
 		return ""+identifierString;
 	}

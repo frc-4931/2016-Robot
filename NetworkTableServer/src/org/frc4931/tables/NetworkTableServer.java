@@ -38,12 +38,15 @@ public class NetworkTableServer {
             while (true) {
                 glide(4, 0, 0, 8, 5000);
             }
+        } catch ( InterruptedException e ) {
+            // Our thread was interrupted, so acknowledge that we're handling it and return from the method ...
+            Thread.interrupted();
         } finally {
             NetworkTable.shutdown();
         }
     }
 
-    public static void glide(double startX, double startY, double endX, double endY, long delta) {
+    public static void glide(double startX, double startY, double endX, double endY, long delta) throws InterruptedException {
         posX = startX;
         posY = startY;
 
@@ -56,11 +59,7 @@ public class NetworkTableServer {
             posY += deltaY;
 
             update();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(100);
         }
     }
 
