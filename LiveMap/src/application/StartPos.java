@@ -1,7 +1,7 @@
 package application;
 
 
-public class StartPos 
+public class StartPos
 {
 	private double mainX;
 	private double mainY;
@@ -25,12 +25,7 @@ public class StartPos
 	 */
 	public boolean withinBoundries(double x,double y)
 	{
-		if((mainX<=x && x<=(mainX+0.762)) && (mainY<=y && y<=mainY+0.762))
-		{
-			return true;
-		}
-		else
-			return false;
+		return (mainX<=x && x<=(mainX+0.762)) && (mainY<=y && y<=mainY+0.762);
 	}
 	
 	/**

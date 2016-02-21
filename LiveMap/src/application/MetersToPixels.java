@@ -6,7 +6,7 @@ public class MetersToPixels {
 	/**
 	 * converts meters to pixels
 	 * @param mp meters to be converted to pixels
-	 * @return
+	 * @return the number of pixels representing the number of meters
 	 */
 	public static int convertPixels(double mp)
 	{
@@ -17,11 +17,11 @@ public class MetersToPixels {
 	/**
 	 * converts pixels to meters
 	 * @param pm pixels to be converted to meters
-	 * @return
+	 * @return the value in meters
 	 */
 	public static double convertMeters(int pm)
 	{
-		double i = (double) (pm/PIXELS_PER_METER);
+		double i = pm/PIXELS_PER_METER;
 		return i;
 	}
 }

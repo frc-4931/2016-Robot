@@ -23,10 +23,6 @@
 /* Created Sun Jan 10 12:59:55 CST 2016 */
 package org.frc4931.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 import org.frc4931.robot.arm.Arm;
 import org.frc4931.robot.arm.CalibrateArm;
 import org.frc4931.robot.drive.DriveSystem;
@@ -43,9 +39,12 @@ import org.strongback.components.ui.FlightStick;
 import org.strongback.drive.TankDrive;
 import org.strongback.hardware.Hardware;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Robot extends IterativeRobot {
 
-    private static final String LOG_FILES_DIRECTORY_PATH = "/home/lvuser/";
+    //private static final String LOG_FILES_DIRECTORY_PATH = "/home/lvuser/";
     private static final int LEFT_FRONT_MOTOR_PORT = 2;
     private static final int LEFT_REAR_MOTOR_PORT = 3;
     private static final int RIGHT_FRONT_MOTOR_PORT = 0;

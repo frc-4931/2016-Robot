@@ -1,18 +1,18 @@
 package application;
 	
 
-import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class LiveMap extends Application {
-	private Map map = new Map();
-	/** 
+	protected Map map = new Map();
+	/**
 	 * @param x the x-axis of the map
 	 * @param y the y-axis of the map
 	 * @param r the angle of rotation (optional)
@@ -53,7 +53,7 @@ public class LiveMap extends Application {
 		timer.start();
 	}
 	
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
 		launch(args);
 	}
