@@ -23,7 +23,9 @@
 /* Created Sun Jan 10 12:59:55 CST 2016 */
 package org.frc4931.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 import org.frc4931.robot.arm.Arm;
 import org.frc4931.robot.arm.CalibrateArm;
 import org.frc4931.robot.drive.DriveSystem;
@@ -69,6 +71,12 @@ public class Robot extends IterativeRobot {
 //                  .recordNoData().recordNoEvents().recordNoCommands();
                   .recordDataToFile(LOG_FILES_DIRECTORY_PATH)
                   .recordEventsToFile(LOG_FILES_DIRECTORY_PATH, 2097152);
+
+        // Initialize the camera server
+        USBCamera camera = new USBCamera("cam1");
+        camera.setSize(240, 180);
+        CameraServer.getInstance().setQuality(50);
+        CameraServer.getInstance().startAutomaticCapture(camera);
 
         // Define the motors and the drive system ...
         Motor leftFrontMotor = Hardware.Motors.victorSP(LEFT_FRONT_MOTOR_CHANNEL);
