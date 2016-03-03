@@ -30,6 +30,7 @@ public class Map {
 	private boolean flag = false;
 	private boolean flag2 = false;
 	private boolean flag3 = true;
+	private boolean obstaclesAdded=false;
 
 	public void update(GraphicsContext gc)
 	{
@@ -68,6 +69,7 @@ public class Map {
 			{
 				if(flag3)
 				{
+					
 				     oB = new BuildObstacles(side.getSide());
 				     flag3=false;
 				}
@@ -145,4 +147,8 @@ public class Map {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
+	private BuildObstacles getBD()
+	{
+		return oB;
+	}
 }
