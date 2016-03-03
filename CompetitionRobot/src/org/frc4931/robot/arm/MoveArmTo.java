@@ -46,6 +46,7 @@ public class MoveArmTo extends org.strongback.command.Command {
 
     @Override
     public void initialize() {
+        System.out.println("Moving to " + targetAngle);
         arm.setControlMode(TalonController.ControlMode.POSITION);
         arm.setTargetAngle(targetAngle);
     }
@@ -53,5 +54,16 @@ public class MoveArmTo extends org.strongback.command.Command {
     @Override
     public boolean execute() {
         return arm.isAtTarget();
+    }
+
+    /**
+     * Perform one-time clean up of the resources used by this command and typically putting the robot in a safe state. This
+     * method is always called after {@link #execute()} returns {@code true} unless {@link #interrupted()} is called.
+     * <p>
+     * By default this method does nothing.
+     */
+    @Override
+    public void end() {
+        System.out.println("Done moving");
     }
 }

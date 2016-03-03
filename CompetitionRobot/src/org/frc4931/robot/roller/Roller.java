@@ -63,6 +63,7 @@ public class Roller implements Requirable
 	 * Checks if a ball is in.
 	 */
 	public boolean ballIn() {
-		return iA.getInput() && iB.getInput();
+//		return iA.getInput() && iB.getInput();
+		return false;
 	}
 }

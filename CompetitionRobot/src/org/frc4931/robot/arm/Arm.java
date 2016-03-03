@@ -32,7 +32,7 @@ import org.strongback.control.TalonController;
  * It is used to traverse tall defenses and open gates.
  */
 public class Arm implements Requirable {
-    public static final double MOTOR_SPEED = 1.0;
+    public static final double MOTOR_SPEED = 0.5;
 
     private final TalonController controller;
     private final AngleSensor angleSensor;
@@ -46,7 +46,7 @@ public class Arm implements Requirable {
         this.controller = controller;
         angleSensor = controller.getEncoderInput();
         //FIXME Strongback assigns reverse limit switch to forward
-        homeSwitch = controller.getForwardLimitSwitch();
+        homeSwitch = controller.getReverseLimitSwitch();
     }
 
     /**
@@ -66,6 +66,10 @@ public class Arm implements Requirable {
      */
     public TalonController setControlMode(TalonController.ControlMode mode) {
         return controller.setControlMode(mode);
+    }
+
+    public TalonController withGains(double p, double i, double d) {
+        return controller.withGains(p, i, d);
     }
 
     public void zero() {
@@ -107,5 +111,13 @@ public class Arm implements Requirable {
 
     public void stop() {
         controller.stop();
+    }
+
+    public double getTarget() {
+        return controller.getTarget();
+    }
+
+    public void enable() {
+        controller.enable();
     }
 }
