@@ -11,17 +11,17 @@ import javafx.geometry.Point2D;
 public class Obstacles 
 {
 	public final static double[] TIME_FINAL ={0,1,2,3,4,5,6,7,8};
-	public final static String LOWBAR = "LB";
-	public final static String ROCKWALL = "RW";
-	public final static String PORTCULLIS = "PC";
-	public final static String SHOVELS_OF_FRIES = "CF";
-	public final static String RAMPARTS = "RP";
-	public final static String MOAT = "MT";
-	public final static String DRAWBRIDGE = "DB";
-	public final static String SALLY_PORT = "SP";
-	public final static String ROUGH_TERRAIN = "RT";
+	public final static String LOWBAR = "Lowbar";
+	public final static String ROCKWALL = "Rockwall";
+	public final static String PORTCULLIS = "Portcullis";
+	public final static String SHOVELS_OF_FRIES = "Cheval de Frise";
+	public final static String RAMPARTS = "Ramparts";
+	public final static String MOAT = "Moat";
+	public final static String DRAWBRIDGE = "Drawbridge";
+	public final static String SALLY_PORT = "Sally Port";
+	public final static String ROUGH_TERRAIN = "Rough Terrain";
 
-	private String identifierString;
+	private String identifierNum;
 	private double time;
 	/**
 	 * Only pass the positions of the constants in the Position class
@@ -30,16 +30,16 @@ public class Obstacles
 	 */
 	public Obstacles(String o)
 	{
-			identifierString=o;
+			identifierNum=o;
 		
 	}
 	public String getObstacle()
 	{
-		return identifierString;
+		return identifierNum;
 	}
 	public String toString()
 	{
-		return ""+identifierString;
+		return ""+identifierNum;
 	}
 	public boolean checkIfGood(String r)
 	{
@@ -53,25 +53,25 @@ public class Obstacles
 	}
 	public void assignTime()
 	{
-		switch(identifierString)
+		switch(identifierNum)
 		{
-			case "LB": time=TIME_FINAL[1];
+			case LOWBAR: time=TIME_FINAL[1];
 				break;
-			case "CF": time=TIME_FINAL[2];
+			case ROCKWALL: time=TIME_FINAL[2];
 				break;
-			case "RT": time=TIME_FINAL[3];
+			case PORTCULLIS: time=TIME_FINAL[3];
 				break;
-			case "RW": time=TIME_FINAL[0];
+			case SHOVELS_OF_FRIES: time=TIME_FINAL[0];
 				break;
-			case "MT": time=TIME_FINAL[4];
+			case RAMPARTS: time=TIME_FINAL[4];
 				break;
-			case "PC": time=TIME_FINAL[5];
+			case MOAT: time=TIME_FINAL[5];
 				break;
-			case "DB": time=TIME_FINAL[6];
+			case DRAWBRIDGE: time=TIME_FINAL[6];
 				break;
-			case "SP": time=TIME_FINAL[7];
+			case SALLY_PORT: time=TIME_FINAL[7];
 				break;
-			case "RP": time=TIME_FINAL[9];
+			case ROUGH_TERRAIN: time=TIME_FINAL[9];
 				break;
 		}
 	}
