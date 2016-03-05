@@ -1,40 +1,32 @@
 package application;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.*;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ButtonCanvas extends Application 
+public class ButtonCanvas  
 {
-	private static final int[] IDENTIFIERS={0,1,2,3,4,5,6,7,8};
 	private static PrintWriter sc;
 	private RadioButton[] buttons=new RadioButton[8];
-	private int count=0;
-	private TextField auto=new TextField();
+	private TextField auto;
 	public static final String FILE_NAME = "Obstacles.txt";
-	@Override
-	public void start(Stage primaryStage) throws Exception 
+	private Stage stage;
+	public ButtonCanvas() 
 	{
+		stage=new Stage();
+		try 
+		{
+			sc =new PrintWriter(new FileWriter(FILE_NAME));
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		GridPane c=new GridPane();
 		ToggleGroup tG=new ToggleGroup();
 		buttons[0]=new RadioButton("Portcullis");
@@ -51,9 +43,10 @@ public class ButtonCanvas extends Application
 			RadioButton seleted=(RadioButton)tG.getSelectedToggle();
 			sc.println(seleted.getText());
 			sc.close();
-			System.exit(0);
+			stage.close();
 		});
 		c.add(submit,5, 4);
+		auto=new TextField();
 		auto.setText("Obstacle is");
 		c.add(auto, 0, 1);
 		for(int x=0;x<buttons.length;x++)
@@ -71,20 +64,7 @@ public class ButtonCanvas extends Application
 			});
 			c.add(buttons[x], 1, x);
 		}
-		primaryStage.setScene(new Scene(c));
-		primaryStage.show();
-	}
-	public static void main(String[] args)
-	{
-		try 
-		{
-			sc =new PrintWriter(new FileWriter(FILE_NAME));
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		launch(args);
-		sc.close();
+		stage.setScene(new Scene(c));
+		stage.show();
 	}
 }
