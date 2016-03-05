@@ -19,39 +19,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.frc4931.robot.arm;
 
-import org.strongback.control.TalonController;
+package org.frc4931.robot.components;
 
-/**
- * This is the command to move the arm to a specified angle
- * 
- * @author Julian Nieto
- */
-public class MoveArmTo extends org.strongback.command.Command {
-    private final Arm arm;
-    private final double targetAngle;
+import org.frc4931.robot.math.EulerAngle;
+import org.frc4931.robot.math.Quaternion;
+import org.frc4931.robot.math.Vector3d;
 
-    /**
-     * Create a command with the desired target angle.
-     *
-     * @param arm arm inputed
-     * @param targetAngle degrees desired
-     */
-    public MoveArmTo(Arm arm, double targetAngle) {
-        super(arm);
-        this.arm = arm;
-        this.targetAngle = targetAngle;
+public class MockIMU implements IMU {
+    private State state;
+
+    public MockIMU() {
+        state = new State(EulerAngle.ZERO, Quaternion.IDENTITY, Vector3d.ZERO);
     }
 
     @Override
-    public void initialize() {
-        arm.setControlMode(TalonController.ControlMode.POSITION);
-        arm.setTargetAngle(targetAngle);
+    public State getState() {
+        return state;
     }
 
-    @Override
-    public boolean execute() {
-        return arm.isAtTarget();
+    public void setState(State state) {
+        this.state = state;
     }
 }

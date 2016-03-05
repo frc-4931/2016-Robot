@@ -22,6 +22,7 @@
 
 package org.frc4931.robot.drive;
 
+import org.frc4931.robot.components.MockIMU;
 import org.junit.Before;
 import org.junit.Test;
 import org.strongback.drive.TankDrive;
@@ -33,17 +34,19 @@ import static org.junit.Assert.assertEquals;
 public class TestDriveSystem {
     private MockMotor leftMotor;
     private MockMotor rightMotor;
+    private MockIMU imu;
     private DriveSystem driveSystem;
 
     @Before
     public void beforeEach() {
         leftMotor = Mock.stoppedMotor();
         rightMotor = Mock.stoppedMotor();
-        driveSystem = new DriveSystem(new TankDrive(leftMotor, rightMotor));
+        imu = new MockIMU();
+        driveSystem = new DriveSystem(new TankDrive(leftMotor, rightMotor), imu);
     }
 
     /**
-     * Tests {@link DriveSystem#arcade(double, double)} in its normal direction (speed is not inverted).
+     * Tests {@link DriveSystem#arcade(double, double)}.
      */
     @Test
     public void testArcade() {
@@ -54,31 +57,6 @@ public class TestDriveSystem {
         driveSystem.arcade(-1.0, 0.0);
         assertEquals(-1.0, leftMotor.getSpeed(), 0.0);
         assertEquals(-1.0, rightMotor.getSpeed(), 0.0);
-
-        driveSystem.arcade(0.0, 1.0);
-        assertEquals(-1.0, leftMotor.getSpeed(), 0.0);
-        assertEquals(1.0, rightMotor.getSpeed(), 0.0);
-
-        driveSystem.arcade(0.0, -1.0);
-        assertEquals(1.0, leftMotor.getSpeed(), 0.0);
-        assertEquals(-1.0, rightMotor.getSpeed(), 0.0);
-    }
-
-    /**
-     * Tests {@link DriveSystem#arcade(double, double)} when the direction is flipped.
-     * Drive speed should be inverted, but turn speed should remain unchanged.
-     */
-    @Test
-    public void testFlippedArcade() {
-        driveSystem.setDirectionFlipped(true);
-
-        driveSystem.arcade(1.0, 0.0);
-        assertEquals(-1.0, leftMotor.getSpeed(), 0.0);
-        assertEquals(-1.0, rightMotor.getSpeed(), 0.0);
-
-        driveSystem.arcade(-1.0, 0.0);
-        assertEquals(1.0, leftMotor.getSpeed(), 0.0);
-        assertEquals(1.0, rightMotor.getSpeed(), 0.0);
 
         driveSystem.arcade(0.0, 1.0);
         assertEquals(-1.0, leftMotor.getSpeed(), 0.0);
