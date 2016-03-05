@@ -23,8 +23,6 @@
 /* Created Sun Jan 10 12:59:55 CST 2016 */
 package org.frc4931.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4931.robot.arm.Arm;
 import org.frc4931.robot.arm.CalibrateArm;
 import org.frc4931.robot.arm.LowerArmWhile;
@@ -46,6 +44,9 @@ import org.strongback.components.ui.FlightStick;
 import org.strongback.control.TalonController;
 import org.strongback.drive.TankDrive;
 import org.strongback.hardware.Hardware;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
     private static final String LOG_FILES_DIRECTORY_PATH = "/home/lvuser/";
@@ -125,7 +126,9 @@ public class Robot extends IterativeRobot {
         reactor.onTriggeredSubmit(armUp, () -> new RaiseArmWhile(arm, armUp));
         reactor.onTriggeredSubmit(armDown, () -> new LowerArmWhile(arm, armDown));
         reactor.onTriggeredSubmit(joystick.getThumb(), () -> new CalibrateArm(arm));
-        reactor.onTriggeredSubmit(joystick.getButton(7), () -> new MoveArmTo(arm, target = SmartDashboard.getNumber("target")));
+        reactor.onTriggeredSubmit(joystick.getButton(7), () -> new MoveArmTo(arm, SmartDashboard.getNumber("desiredAngle")));
+
+        SmartDashboard.putNumber("desiredAngle", 0);
 
         // Set up the data recorder to capture the left & right motor speeds and the sensivity.
         // We have to do this before we start Strongback...
@@ -146,8 +149,6 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     }
 
-
-    double target;
     @Override
     public void teleopInit() {
         // Kill anything running, and start it ...
@@ -164,11 +165,12 @@ public class Robot extends IterativeRobot {
 
         arm.withGains(p, i, d);
 
-        double armAngle = -arm.getAngle();
+        double armAngle = arm.getAngle();
+        double target = arm.getTarget();
         SmartDashboard.putNumber("Arm Angle", armAngle);
         SmartDashboard.putNumber("Error", armAngle - target);
         SmartDashboard.putBoolean("Arm At Home", arm.isAtHome());
-        SmartDashboard.putNumber("Target", arm.getTarget());
+        SmartDashboard.putNumber("Target", target);
     }
 
     @Override

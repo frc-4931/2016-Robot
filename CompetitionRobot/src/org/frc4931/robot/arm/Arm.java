@@ -25,6 +25,7 @@ package org.frc4931.robot.arm;
 import org.strongback.command.Requirable;
 import org.strongback.components.AngleSensor;
 import org.strongback.components.Switch;
+import org.strongback.components.TalonSRX.FeedbackDevice;
 import org.strongback.control.TalonController;
 
 /**
@@ -44,7 +45,8 @@ public class Arm implements Requirable {
      */
     public Arm(TalonController controller) {
         this.controller = controller;
-        angleSensor = controller.getEncoderInput();
+        controller.setFeedbackDevice(FeedbackDevice.QUADRATURE_ENCODER);
+        angleSensor = controller.getSelectedSensor();
         //FIXME Strongback assigns reverse limit switch to forward
         homeSwitch = controller.getReverseLimitSwitch();
     }
