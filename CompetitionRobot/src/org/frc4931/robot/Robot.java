@@ -25,6 +25,12 @@ package org.frc4931.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.frc4931.robot.arm.Arm;
 import org.frc4931.robot.arm.LowerArmWhile;
 import org.frc4931.robot.arm.RaiseArmWhile;
@@ -58,6 +64,17 @@ public class Robot extends IterativeRobot {
     private static final int ROLLER_MOTOR_CAN_ID = 0;
     private static final int ARM_MOTOR_CAN_ID = 1;
 
+  //String finals for reading
+    public final static String LOWBAR = "Lowbar";
+	public final static String ROCKWALL = "Rockwall";
+	public final static String PORTCULLIS = "Portcullis";
+	public final static String SHOVELS_OF_FRIES = "Cheval de Frise";
+	public final static String RAMPARTS = "Ramparts";
+	public final static String MOAT = "Moat";
+	public final static String DRAWBRIDGE = "Drawbridge";
+	public final static String SALLY_PORT = "Sally Port";
+	public final static String ROUGH_TERRAIN = "Rough Terrain";
+	
     // 7 pulses per rev; 71:1 motor gearing ratio; 28:12 sprocket ratio; 360 degrees per rev
     private static final double ARM_PULSES_PER_DEGREE = 3.2213;
 
@@ -71,6 +88,7 @@ public class Robot extends IterativeRobot {
     private ContinuousRange driveSpeed;
     private ContinuousRange turnSpeed;
     private double driveScale = 1.0;
+    private BufferedReader reader=null;
 
     @Override
     public void robotInit() {
@@ -135,7 +153,43 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // Start Strongback functions ...
         Strongback.restart();
-        Strongback.submit(new TimedDrive(drive,AUTO_DRIVE_SPEED,0,AUTO_DRIVE_TIME));
+        String line="";
+        try 
+        {
+			reader=new BufferedReader(new FileReader("Obstacles.txt"));
+			line= reader.readLine();
+		} 
+        catch (FileNotFoundException e) 
+        {
+			e.printStackTrace();
+		} 
+        catch (IOException e) 
+        {
+        	e.printStackTrace();
+		}
+        
+        //Switch used to select and run Autonomous commands
+        switch(line)
+		{
+			case LOWBAR: //TODO enter Autonomous commands here
+				break;
+			case ROCKWALL: 
+				break;
+			case PORTCULLIS: 
+				break;
+			case SHOVELS_OF_FRIES: 
+				break;
+			case RAMPARTS: 
+				break;
+			case MOAT:
+				break;
+			case DRAWBRIDGE: 
+				break;
+			case SALLY_PORT: 
+				break;
+			case ROUGH_TERRAIN: 
+				break;
+		}
     }
 
     @Override
