@@ -49,7 +49,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-    private static final String LOG_FILES_DIRECTORY_PATH = "/home/lvuser/";
+    private static final String LOG_FILES_DIRECTORY_PATH = "/home/lvuser/frc4931";
 
     private static final int LEFT_FRONT_MOTOR_PWM_CHANNEL = 2;
     private static final int LEFT_REAR_MOTOR_PWM_CHANNEL = 3;
@@ -79,7 +79,8 @@ public class Robot extends IterativeRobot {
         Strongback.configure()
 //                  .recordNoData().recordNoEvents().recordNoCommands();
                   .recordDataToFile(LOG_FILES_DIRECTORY_PATH)
-                  .recordEventsToFile(LOG_FILES_DIRECTORY_PATH, 2097152);
+                  .recordEventsToFile(LOG_FILES_DIRECTORY_PATH, 2097152)
+                  .initialize();
 
         // Define the motors and the drive system ...
         Motor leftFrontMotor = Hardware.Motors.victorSP(LEFT_FRONT_MOTOR_PWM_CHANNEL);
@@ -140,10 +141,11 @@ public class Robot extends IterativeRobot {
 
         // Set up the data recorder to capture the left & right motor speeds and the sensivity.
         // We have to do this before we start Strongback...
-//        Strongback.dataRecorder()
-//                  .register("Left motors", leftMotors)
-//                  .register("Right motors", rightMotors)
-//                  .register("Sensitivity", throttle.scaleAsInt(1000));
+       Strongback.dataRecorder()
+                 .register("Left motors", leftMotors)
+                 .register("Right motors", rightMotors)
+                 .register("Sensitivity", throttle.scaleAsInt(1000))
+                 .register("Arm Angle",100.0,arm::getAngle);
     }
 
     @Override
