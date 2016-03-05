@@ -29,6 +29,10 @@ package org.frc4931.robot.arm;
  */
 public class MoveArmTo extends org.strongback.command.Command {
     private static final double DEGREE_TOLERANCE = 5.0;
+    private static final double SHOVEL_OF_FRIES_DOWN = 190.0;
+    private static final double SHOVEL_OF_FRIES_UP  = 130.0;
+    private static final double PORTICULUS_DOWN = 190.0;
+    private static final double PORTICULUS_UP = 130.0;
 
     private final Arm arm;
     private final double targetAngle;
