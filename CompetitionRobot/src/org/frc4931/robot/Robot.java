@@ -126,9 +126,17 @@ public class Robot extends IterativeRobot {
         reactor.onTriggeredSubmit(armUp, () -> new RaiseArmWhile(arm, armUp));
         reactor.onTriggeredSubmit(armDown, () -> new LowerArmWhile(arm, armDown));
         reactor.onTriggeredSubmit(joystick.getThumb(), () -> new CalibrateArm(arm));
-        reactor.onTriggeredSubmit(joystick.getButton(7), () -> new MoveArmTo(arm, SmartDashboard.getNumber("desiredAngle")));
+        reactor.onTriggeredSubmit(joystick.getButton(7), () -> new MoveArmTo(arm, SmartDashboard.getNumber("Desired Angle")));
 
-        SmartDashboard.putNumber("desiredAngle", 0);
+        // Initialize the SmartDashboard values ...
+        SmartDashboard.putNumber("Kp", 0);
+        SmartDashboard.putNumber("Ki", 0);
+        SmartDashboard.putNumber("Kd", 0);
+        SmartDashboard.putNumber("Desired Angle", 0);
+        SmartDashboard.putNumber("Target", arm.getTarget());
+        SmartDashboard.putNumber("Error", arm.getAngle() - arm.getTarget());
+        SmartDashboard.putNumber("Arm Angle", arm.getAngle());
+        SmartDashboard.putBoolean("Arm At Home", arm.isAtHome());
 
         // Set up the data recorder to capture the left & right motor speeds and the sensivity.
         // We have to do this before we start Strongback...
